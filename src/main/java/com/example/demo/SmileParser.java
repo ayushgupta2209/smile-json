@@ -19,8 +19,27 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class SmileParser {
-  final ObjectMapper smileMapper = new ObjectMapper(new SmileFactory());
-  final ObjectMapper mapper = new ObjectMapper();
+
+  SmileFactory smileFactory;
+  final ObjectMapper mapper;
+  final ObjectMapper smileMapper;
+
+  SmileParser() {
+    smileFactory = new SmileFactory();
+
+    /***
+     * By default only field names(keys) are back referenced in SmileGenerator through a flag.
+     * But we can enable field values back referencing as well using the following flag:
+     * CHECK_SHARED_STRING_VALUES: Whether generator should check if it can "share" short (at most 64 bytes encoded) String value during generating content or not.
+    ***/
+
+    //TODO: Uncomment the below line to enable CHECK_SHARED_STRING_VALUES. This can further reduce the size of smile format based on repetitiveness in your values
+    // You can clearly see the difference by converting Sample_back_referencing.json to Smile.
+    // Comment/uncomment this feature flag and observe the difference in Smile output
+    //smileFactory.enable(SmileGenerator.Feature.CHECK_SHARED_STRING_VALUES);
+    mapper = new ObjectMapper();
+    smileMapper = new ObjectMapper(smileFactory);
+  }
 
   public byte[] jsonToSmile(String jsonValue) throws JsonProcessingException {
     try {

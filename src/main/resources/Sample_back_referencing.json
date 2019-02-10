@@ -1,0 +1,21 @@
+[{
+  "_id": "Value1",
+  "index": 0,
+  "guid": "Guid1",
+  "isActive": true
+}, {
+  "_id": "Value1",
+  "index": 100,
+  "guid": "Guid2",
+  "isActive": false
+}, {
+  "_id": "Value2",
+  "index": 245,
+  "guid": "Guid1",
+  "isActive": true
+}, {
+  "_id": "Value1",
+  "index": 100,
+  "guid": "Guid12",
+  "isActive": true
+}]
