@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -23,8 +24,14 @@ public class DemoApplication {
 
     try {
       File directory = new File(resourceFolderPath + "Sample_100KB.json");
+
+      //Converting Json to Smile
       byte[] smileBytes = smileParser.jsonToSmile(directory);
+      //Copying to file to verify
       smileParser.writeToFile(smileBytes, resourceFolderPath + "Sample_100KB_json_converted.sml");
+
+      //Converting Smile to Json
+      JsonNode node = smileParser.smileToJSON(smileBytes);
 
     } catch (IOException e) {
       e.printStackTrace();
